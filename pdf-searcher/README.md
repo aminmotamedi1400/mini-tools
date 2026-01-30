@@ -28,7 +28,7 @@ It is particularly useful for preparing structured context for **AI-assisted ana
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/yourusername/toolbox.git
+   git clone https://github.com/aminmotamedi1400/mini-tools.git
    cd toolbox/pdf-searcher
    ```
 
