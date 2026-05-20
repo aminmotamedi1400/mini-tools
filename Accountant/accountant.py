@@ -12,13 +12,13 @@ from datetime import datetime, date
 #     windll.shcore.SetProcessDpiAwareness(1)
 # except:
 #     pass
-from ctypes import windll
-windll.shcore.SetProcessDpiAwareness(2)
+# from ctypes import windll
+# windll.shcore.SetProcessDpiAwareness(2)
 
 class PersonalAccountingApp:
     def __init__(self, root):
         self.root = root
-        self.root.tk.call('tk', 'scaling', 1.2)
+        self.root.tk.call('tk', 'scaling', 1.5)
         self.root.title("Personal Accounting App")
         self.root.geometry("2000x1000")
         self.root.minsize(1000, 600)
