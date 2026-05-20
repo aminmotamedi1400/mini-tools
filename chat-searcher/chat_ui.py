@@ -12,7 +12,7 @@ from chat_indexer import ChatIndexer
 
 
 class LicenseChecker:
-    EXPIRY_DATE = datetime(2026, 3, 1, 0, 0, 0)
+    EXPIRY_DATE = datetime(2027, 3, 1, 0, 0, 0)
     
     @staticmethod
     def is_valid():
