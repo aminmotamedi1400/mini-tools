@@ -2,7 +2,7 @@
 
 <h1 align="center">
   <br>
-  <a href="https://github.com/aminmotamedi1400/mini-tools"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=32&duration=3000&pause=500&color=F7C644&center=true&vCenter=true&width=800&lines=🛠️+Mini+Tools+Collection+🛠️;Your+Ultimate+Productivity+Toolkit" alt="Typing SVG" /></a>
+  <a href="https://github.com/aminmotamedi1400/mini-tools"><img src="index.svg" alt="Typing SVG" /></a>
   <br>
 </h1>
 
