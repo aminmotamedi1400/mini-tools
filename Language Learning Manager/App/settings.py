@@ -3,8 +3,8 @@ from tkinter import ttk, messagebox, filedialog, colorchooser
 from datetime import datetime
 import json
 import os
-import database as db
-from utils import (COLORS, FONTS, create_card, create_input_field,
+import App.database as db
+from App.utils import (COLORS, FONTS, create_card, create_input_field,
                    create_dropdown, create_text_area, create_rounded_button)
 
 

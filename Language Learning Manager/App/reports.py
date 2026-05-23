@@ -1,8 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
 from datetime import datetime, timedelta
-import database as db
-from utils import (COLORS, FONTS, create_card, create_rounded_button,
+import App.database as db
+from App.utils import (COLORS, FONTS, create_card, create_rounded_button,
                    create_progress_bar, format_duration, create_scrollable_frame)
 
 
