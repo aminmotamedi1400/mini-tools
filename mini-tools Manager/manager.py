@@ -59,8 +59,6 @@ DEFAULT_TOOLS_META = {
     "backup csv":              {"category": "Documents",    "description": "CSV file backup utility",            "emoji": "\U0001f4be"},
     "Challenges Manager":      {"category": "Productivity", "description": "Track and manage challenges",        "emoji": "\U0001f3c6"},
     "chat-searcher":           {"category": "Documents",    "description": "Search through chat histories",      "emoji": "\U0001f50d"},
-    "Deutsch Words":           {"category": "Language",     "description": "German vocabulary trainer",          "emoji": "\U0001f1e9\U0001f1ea"},
-    "English Words":           {"category": "Language",     "description": "English vocabulary trainer",         "emoji": "\U0001f1ec\U0001f1e7"},
     "File Folders Organizer":  {"category": "Documents",    "description": "Organize files and folders",         "emoji": "\U0001f4c1"},
     "mini-tools Manager":      {"category": "Development",  "description": "This tool manager itself",           "emoji": "\U0001f6e0\ufe0f"},
     "Password Manager":        {"category": "Productivity", "description": "Secure password management",         "emoji": "\U0001f510"},
@@ -71,6 +69,7 @@ DEFAULT_TOOLS_META = {
     "Shopping Management":     {"category": "Productivity", "description": "Shopping list and budget tracker",   "emoji": "\U0001f6d2"},
     "test App":                {"category": "Development",  "description": "Testing and debugging sandbox",      "emoji": "\U0001f9ea"},
     "Thesis Manager":          {"category": "Productivity", "description": "Thesis project management",          "emoji": "\U0001f393"},
+    "Language Learning Manager":    {"category": "Language",     "description": "tool for language learning",    "emoji": "\U0001f33f"},
 }
 
 
