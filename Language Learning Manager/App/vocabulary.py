@@ -176,6 +176,7 @@ class VocabularyPage:
         # Scrollable content
         canvas = tk.Canvas(dialog, bg=COLORS['bg_card'], highlightthickness=0)
         scrollbar = ttk.Scrollbar(dialog, orient="vertical", command=canvas.yview)
+
         main = tk.Frame(canvas, bg=COLORS['bg_card'], padx=25, pady=20)
 
         main.bind("<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
@@ -185,8 +186,34 @@ class VocabularyPage:
         canvas.pack(side="left", fill="both", expand=True)
         scrollbar.pack(side="right", fill="y")
 
+        # Mouse wheel scroll fix
+        def _on_mousewheel(event):
+            try:
+                if event.delta:
+                    canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
+                elif event.num == 4:   # Linux scroll up
+                    canvas.yview_scroll(-1, "units")
+                elif event.num == 5:   # Linux scroll down
+                    canvas.yview_scroll(1, "units")
+            except:
+                pass
+
+        def _bind_mousewheel(_event=None):
+            canvas.bind_all("<MouseWheel>", _on_mousewheel)   # Windows / Mac
+            canvas.bind_all("<Button-4>", _on_mousewheel)     # Linux up
+            canvas.bind_all("<Button-5>", _on_mousewheel)     # Linux down
+
+        def _unbind_mousewheel(_event=None):
+            canvas.unbind_all("<MouseWheel>")
+            canvas.unbind_all("<Button-4>")
+            canvas.unbind_all("<Button-5>")
+
+        dialog.bind("<Enter>", _bind_mousewheel)
+        dialog.bind("<Leave>", _unbind_mousewheel)
+        dialog.protocol("WM_DELETE_WINDOW", lambda: (_unbind_mousewheel(), dialog.destroy()))
+
         tk.Label(main, text="📝 Add New Word", font=FONTS['subtitle'],
-                 bg=COLORS['bg_card'], fg=COLORS['text_primary']).pack(anchor='w', pady=(0, 20))
+                bg=COLORS['bg_card'], fg=COLORS['text_primary']).pack(anchor='w', pady=(0, 20))
 
         # Language
         languages = db.get_languages()
@@ -216,7 +243,7 @@ class VocabularyPage:
 
         # Part of Speech
         pos_options = ["Noun", "Verb", "Adjective", "Adverb", "Preposition",
-                       "Conjunction", "Pronoun", "Article", "Interjection", "Phrase", "Other"]
+                    "Conjunction", "Pronoun", "Article", "Interjection", "Phrase", "Other"]
         pos_frame, pos_var, _ = create_dropdown(main, "Part of Speech", pos_options, COLORS['bg_card'])
         pos_frame.pack(fill='x', pady=5)
 
@@ -236,12 +263,12 @@ class VocabularyPage:
         diff_frame = tk.Frame(main, bg=COLORS['bg_card'])
         diff_frame.pack(fill='x', pady=5)
         tk.Label(diff_frame, text="Difficulty (1-5)", font=FONTS['small_bold'],
-                 bg=COLORS['bg_card'], fg=COLORS['text_secondary']).pack(anchor='w')
+                bg=COLORS['bg_card'], fg=COLORS['text_secondary']).pack(anchor='w')
         diff_var = tk.IntVar(value=3)
         diff_scale = tk.Scale(diff_frame, from_=1, to=5, orient='horizontal',
-                              variable=diff_var, bg=COLORS['bg_card'], fg=COLORS['text_primary'],
-                              highlightthickness=0, troughcolor=COLORS['input_bg'],
-                              activebackground=COLORS['accent'])
+                            variable=diff_var, bg=COLORS['bg_card'], fg=COLORS['text_primary'],
+                            highlightthickness=0, troughcolor=COLORS['input_bg'],
+                            activebackground=COLORS['accent'])
         diff_scale.pack(fill='x')
 
         # Buttons
@@ -281,6 +308,7 @@ class VocabularyPage:
                 difficulty=diff_var.get()
             )
 
+            _unbind_mousewheel()
             dialog.destroy()
             self.refresh_list()
             messagebox.showinfo("Success", f"Word '{word}' added successfully!")
@@ -288,9 +316,13 @@ class VocabularyPage:
         save_btn = create_rounded_button(btn_frame, "💾 Save Word", save_word, bg=COLORS['btn_success'])
         save_btn.pack(side='left', padx=(0, 10))
 
-        cancel_btn = create_rounded_button(btn_frame, "Cancel", dialog.destroy, bg=COLORS['btn_secondary'])
+        cancel_btn = create_rounded_button(
+            btn_frame,
+            "Cancel",
+            lambda: (_unbind_mousewheel(), dialog.destroy()),
+            bg=COLORS['btn_secondary']
+        )
         cancel_btn.pack(side='left')
-
     def on_double_click(self, event):
         selected = self.tree.selection()
         if not selected:

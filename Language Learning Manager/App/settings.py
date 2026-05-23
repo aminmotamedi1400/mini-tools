@@ -36,8 +36,8 @@ class SettingsPage:
 
         def on_mousewheel(event):
             canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
-        canvas.bind_all("<MouseWheel>", on_mousewheel)
-
+        # FIX: Changed bind_all to bind to make the event local
+        canvas.bind("<MouseWheel>", on_mousewheel)
         # Sections
         self.build_languages_section()
         self.build_resources_section()
@@ -110,7 +110,7 @@ class SettingsPage:
 
             if res['total_units'] > 0:
                 pct = int((res['completed_units'] / res['total_units']) * 100)
-                from utils import create_progress_bar
+                from App.utils import create_progress_bar
                 bar = create_progress_bar(prog_frame, res['completed_units'],
                                           res['total_units'], color)
                 bar.pack(fill='x')
